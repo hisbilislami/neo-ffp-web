@@ -1,87 +1,164 @@
-# Welcome to React Router!
+# FFP Web (Financial Farm Planning)
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Frontend application for the **Financial Farm Planning (FFP)** system — a platform for managing farm operations, crop lifecycle tracking, inventory, and harvest prediction.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+This project is a **decoupled frontend client** built with React Router 7 and consumes a separate backend API (Hono + PostgreSQL + Prisma).
 
-## Features
+---
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## 🧠 Overview
 
-## Getting Started
+FFP Web handles the user interface layer for:
 
-### Installation
+- Farm and field management
+- Crop lifecycle tracking (plant → grow → harvest)
+- Inventory tracking (inputs / outputs / stock)
+- Planning and forecasting
+- Operational dashboards
+- Workflow-based farm activities
 
-Install the dependencies:
+The backend is fully separated and acts as the **domain source of truth**.
+
+---
+
+## ⚙️ Tech Stack
+
+- React 18+
+- React Router 7
+- TypeScript
+- Vite
+- Hono API (backend)
+- PostgreSQL + Prisma (backend)
+- React Query (recommended)
+- Zod (validation)
+
+---
+
+## 🏗️ Architecture
+
+Frontend and backend are fully decoupled:
+
+```
+Frontend (FFP Web)
+    ↓ HTTP API
+Backend (Hono API)
+    ↓
+PostgreSQL (Prisma)
+```
+
+### Design Principles
+
+- Frontend = UI + state orchestration only
+- Backend = business logic + domain rules
+- API-first communication
+- No shared server logic in frontend
+
+---
+
+## 🚀 Getting Started
+
+### Install dependencies
+
+```bash
+bun install
+```
+
+or
 
 ```bash
 npm install
 ```
 
-### Development
+---
 
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+### Run development server
 
 ```bash
-npm run build
+bun run dev
 ```
 
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+App runs at:
 
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+http://localhost:5173
 ```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
 
 ---
 
-Built with ❤️ using React Router.
+## 📁 Project Structure
+
+```
+app/
+├── routes/        # Route pages (React Router)
+├── components/    # Shared UI components
+├── features/      # Domain modules (farm, crop, inventory)
+├── services/      # API layer (Hono communication)
+├── hooks/         # Custom React hooks
+├── lib/           # Utilities
+├── types/         # TypeScript types
+└── styles/        # Global styles
+```
+
+---
+
+## 🌾 Domain Modules
+
+- Farm Management
+- Crop Lifecycle Tracking
+- Inventory System
+- Planning & Forecasting
+- Workforce / Activities
+- Reporting & Analytics
+
+Each module is isolated as a **feature-based unit**.
+
+---
+
+## 🔌 Backend Integration
+
+Flow of data:
+
+```
+UI Action
+  → Route Loader / Component
+  → Service Layer
+  → Hono API
+  → Database (Prisma)
+```
+
+---
+
+## 🧪 Development Rules
+
+- Keep business logic in backend
+- Keep frontend components pure
+- API calls must go through `services/`
+- Use React Router loaders only for orchestration
+- Feature-based structure preferred over technical grouping
+
+---
+
+## 📦 Build
+
+```bash
+bun run build
+```
+
+---
+
+## 🚢 Deployment
+
+Can be deployed to:
+
+- Vercel
+- Cloudflare Pages
+- Netlify
+- Any static hosting + API backend
+
+---
+
+## 🎯 Goal
+
+A structured, scalable frontend system for long-term farm operations management.
+
+Frontend is not the source of truth — it is the visual layer of domain reality.
